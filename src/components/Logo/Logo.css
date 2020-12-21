@@ -1,0 +1,11 @@
+.logo-box{
+    height: 20vh;
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.logo-box img{
+    height: 18vh;
+    width: 18vh;
+}
