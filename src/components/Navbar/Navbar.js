@@ -7,7 +7,7 @@ import Navlinks from './Navlinks'
 import './Navbar.css';
 
 export default function Navbar() {
-    const [showMenu, setShowMenu] = useState(true)
+    const [showMenu, setShowMenu] = useState(false)
 
     const transitions = useTransition(showMenu, null, {
         from:{opacity:0, transform:'translateX(-100%'},
