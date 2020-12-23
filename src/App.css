@@ -17,36 +17,39 @@ body{
     background-color:  #eee;
 }
 .main-container .container{
+    padding: 10px;
     width: 100%;   
     background-color: #fff;
     position: relative;
 }
 
 .main-content{
-    padding: 30px;
+    padding: 30px 30px;
     min-height: 90vh;
     width: 70%;
 
 }
 .sidebar-content{
-    /* margin-top: 7vh; */
-    min-height: 90vh;
+    margin: 3px;
+    padding: 30px 10px 10px 10px;
     width: 30%;
+    border: 1px solid #ccc;
     position: absolute;
     right: 0;
     top: 0;
 }
 
 .title-wraper{
-    border-bottom: 2px solid #20238F;
+    /* border-bottom: 2px solid #20238F; */
 }
 .news-wraper{
     margin: 15px 0;
 }
 @media (max-width: 500px){
-    ..main-container .container{
-        /* padding: 10px; */
+    .main-container .container{
+        padding: 20px 15px 0 15px;
     }
+    
     .main-content{
         width: 100%;
         padding: 0px;

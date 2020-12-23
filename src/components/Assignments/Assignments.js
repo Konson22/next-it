@@ -1,45 +1,56 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import { FaDownload } from 'react-icons/fa'
+import Loader from "../Loader/Loader"
+
 import './Assignments.css'
 
 export default function Assignments() {
+    const [assingments, setAssignments ] = useState({
+        status:false,
+        error:false,
+        data:null
+    })
+
+    useEffect(()=>{
+        setAssignments({
+            status:false,
+            error:false,
+            data:null
+        })
+        fetch('/assignments').then(res => res.json()).then(data => setAssignments({
+            status:true,
+            error:false,
+            data:data
+        })).catch( error => setAssignments({
+            error:true,
+            data:null
+        }))
+    }, [])
+
+    let container;
+    if(assingments.status){
+        container = assingments.data.map((assignment => 
+            <div className="assignment-content my-4">
+                    <h5><b>{ assignment.file_title }</b></h5>
+                    <span>Deadline: { assignment.upload_date }</span>
+                    <p>{  assignment.dicription }</p>
+                    <Button variant="success btn-sm"><FaDownload /> Download</Button>
+            </div>
+        ))
+    }else if(!assingments.status){
+        container = <Loader />
+    }else if(assingments.error){
+        container = "something went wrong!"
+
+    }
     return (
         <div>
             <div className="title-wraper">
                 <h2>Assignments</h2>
             </div>
             <div>
-                <div className="assignment-content my-4">
-                    <h5>Physics mechanic assignment No 1</h5>
-                    <span>Deadline: 22/12/2020</span>
-                    <p>desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    <Button variant="success btn-sm"><FaDownload /> Download</Button>
-                </div>
-                <div className="assignment-content my-4">
-                    <h5>Basic math assignment</h5>
-                    <span>Deadline: 22/12/2020</span>
-                    <p>desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    <Button variant="success btn-sm"><FaDownload /> Download</Button>
-                </div>
-                <div className="assignment-content my-4">
-                    <h5>PHYSIC MECHANIC ASSIGNMENT</h5>
-                    <span>Deadline: 22/12/2020</span>
-                    <p>desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    <Button variant="success btn-sm"><FaDownload /> Download</Button>
-                </div>
-                <div className="assignment-content my-4">
-                    <h5>PHYSIC MECHANIC ASSIGNMENT</h5>
-                    <span>Deadline: 22/12/2020</span>
-                    <p>desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    <Button variant="success btn-sm"><FaDownload /> Download</Button>
-                </div>
-                <div className="assignment-content my-4">
-                    <h5>PHYSIC MECHANIC ASSIGNMENT</h5>
-                    <span>Deadline: 22/12/2020</span>
-                    <p>desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    <Button variant="success btn-sm"><FaDownload /> Download</Button>
-                </div>
+                { container }
             </div>
         </div>
     )

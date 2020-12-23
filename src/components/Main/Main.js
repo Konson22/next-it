@@ -1,7 +1,51 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
+import Loader from "../Loader/Loader"
+import { Data } from '../Data'
+import './Main.css'
+
 
 export default function Main() {
+    const [posts, setPosts ] = useState({
+        status:false,
+        error:false,
+        data:null
+    })
+
+    useEffect(()=>{
+        setPosts({
+            status:false,
+            error:false,
+            data:null
+        })
+        fetch('/posts').then(res => res.json()).then(data => setPosts({
+            status:true,
+            error:false,
+            data:data
+        })).catch( error => setPosts({
+            error:true,
+            data:null
+        }))
+    }, [])
+
+    let container;
+    if(posts.data){
+        container = posts.data.map((post => 
+            <div className="news-wraper">
+                <h5><b>{ post.post_title }</b></h5>
+                {
+                    post.post_img != 0 ? <img className="news-img" src={process.env.PUBLIC_URL + post.post_img} />: null
+                }
+                <p>{ post.post_body }</p>
+            </div>
+        ))
+    }else if(!posts.status){
+        container = <Loader />
+    }else if(posts.error){
+        container = "something went wrong!"
+    }
+
+    
     return (
         <main>
             <div className="main-header"></div>
@@ -9,37 +53,9 @@ export default function Main() {
                 <div className="title-wraper">
                     <h2><b>News and updates</b></h2>
                 </div>
-                    <div className="news-wraper">
-                        <h4><b>Re-opening of univeristy</b></h4>
-                        <p>Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens
-                        Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens News and updates screens sizes including desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens News and update</p>
-                    </div>
-                    <div className="news-wraper">
-                        <h4><b>Information for test</b></h4>
-                        <p>Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens
-                        Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    </div>
-                    <div className="news-wraper">
-                        <h4>X-Mass Holly days break</h4>
-                        <p>Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens
-                        Mobile responsive Every website I build is responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens News and updates screens sizes including desktop, tabletes, mobile screens Mobile responsive Every website I build is responsive to variouse screens sizes  responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    </div>
-                    <div className="news-wraper">
-                        <h4>X-Mass Holly days break</h4>
-                        <p>Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens
-                        Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    </div>
-                    <div className="news-wraper">
-                        <h4>X-Mass Holly days break</h4>
-                        <p>Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens
-                        Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    </div>
-                    <div className="news-wraper">
-                        <h4>X-Mass Holly days break</h4>
-                        <p>Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens
-                        Mobile responsive Every website I build is responsive to variouse screens sizes including desktop, tabletes, mobile screens</p>
-                    </div>
-
+                <div>
+                    { container }
+                </div>
             </div>
         </main>
     )
