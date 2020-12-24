@@ -13,6 +13,11 @@ export default function Users() {
     })
     let URL = 'https://next-it-api.herokuapp.com/users'
     useEffect(()=>{
+        setUsers({
+            status:false,
+            error:false,
+            data:null
+        })
         fetch(URL).then(res => res.json()).then(data => setUsers({
             status:true,
             error:false,
