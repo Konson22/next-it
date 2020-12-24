@@ -1,5 +1,6 @@
 
 .loader-wraper{
+    margin-top: 50px;
     display: flex;
     justify-content: center;
 }

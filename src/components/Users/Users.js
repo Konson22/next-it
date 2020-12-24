@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Row, Col } from 'react-bootstrap'
 import { Data } from '../Data'
+import Loader from '../Loader/Loader'
 import './Users.css'
 
 export default function Users() {
@@ -33,7 +34,7 @@ export default function Users() {
             </Link>
         ))
     }else if(!users.status){
-        container = "Loading"
+        container = <Loader />
     }
     return (
         <div>

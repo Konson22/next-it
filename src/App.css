@@ -27,13 +27,13 @@ body{
     padding: 30px 30px;
     min-height: 90vh;
     width: 70%;
+    border: 1px solid #ccc;
 
 }
 .sidebar-content{
     margin: 3px;
     padding: 30px 10px 10px 10px;
     width: 30%;
-    border: 1px solid #ccc;
     position: absolute;
     right: 0;
     top: 0;

@@ -13,6 +13,7 @@ import Profile from './components/Users/Profile'
 import Nofications from './components/Nofications/Nofications'
 import Setting from './components/Setting/Setting'
 import Footer from './components/Footer/Footer'
+import Loader from './components/Loader/Loader'
 
 import './App.css';
 
@@ -50,7 +51,7 @@ function App() {
             </div>
         ))
     }else if(!assingments.status){
-        filesContainer = "Loading"
+        filesContainer = <Loader />
     }else if(assingments.error){
         filesContainer = "something went wrong!"
     }
