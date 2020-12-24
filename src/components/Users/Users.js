@@ -11,14 +11,14 @@ export default function Users() {
         error:false,
         data:null
     })
-    let URL = '/users'
+    let URL = 'https://next-it-api.herokuapp.com/users'
     useEffect(()=>{
         fetch(URL).then(res => res.json()).then(data => setUsers({
             status:true,
             error:false,
             data:data
         }))
-    }, [URL])
+    }, [])
 
     let container;
     if(users.status){
