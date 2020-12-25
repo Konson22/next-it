@@ -63,7 +63,7 @@ function App() {
         <div className="container">
           <div className="main-content">
               <Switch>
-                <Route exact path="/next-it"><Main /></Route>
+                <Route exact path="/"><Main /></Route>
                 <Route exact path="/assignments"><Assignments /></Route>
                 <Route exact path="/studying-materials"><StudyingMaterials /></Route>
                 <Route exact path="/users"><Users /></Route>
