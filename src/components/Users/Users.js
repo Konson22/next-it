@@ -11,6 +11,11 @@ export default function Users() {
         error:false,
         data:null
     })
+    let myHeaders = new Headers({
+        'Content-Type': 'text/plain',
+        'X-Custom-Header': 'hello world'
+    });
+    
     let URL = '/users'
     useEffect(()=>{
         setUsers({
@@ -18,7 +23,10 @@ export default function Users() {
             error:false,
             data:null
         })
-        fetch(URL).then(res => res.json()).then(data => setUsers({
+        fetch(URL, {
+            mode: 'no-cors',
+            headers: myHeaders
+        }).then(res => res.json()).then(data => setUsers({
             status:true,
             error:false,
             data:data
